@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Particles from 'react-particles-js';
 import './App.css';
 
 class App extends Component {
@@ -8,9 +9,18 @@ class App extends Component {
      quote:'',
      author: ' ',
      colors:[
-       '#FF00FF','#EE82EE','#9932CC','#8A2BE2','#FF69B4','#FFA500','#FF6347','#7CFC00','#AFEEEE'
+       '#FF00FF','#EE82EE','#9932CC','#8A2BE2','#FF69B4','#FFA500','#FF6347','#7CFC00','#AFEEEE',
+       '#B0E0E6','#ADD8E6','#87CEFA','#87CEEB','#00BFFF','#8B008B'
      ],
-     selectedColor: ''
+     twitterBoxColor:[
+      '#B0E0E6','#ADD8E6','#87CEFA','#87CEEB','#00BFFF','#8B008B','#FF00FF','#EE82EE','#9932CC','#8A2BE2','#FF69B4','#FFA500','#FF6347','#7CFC00','#AFEEEE'
+     ],
+     nextQuoteBoxColor:[
+      '#B0E0E6','#ADD8E6','#87CEFA','#87CEEB','#00BFFF','#8B008B','#FF00FF','#EE82EE','#9932CC','#8A2BE2','#FF69B4','#FFA500','#FF6347','#7CFC00','#AFEEEE'
+     ],
+     selectedColor: '',
+     twitterSelectedColor: '',
+     nextSelectedQuoteColor:''
     }
   }
   
@@ -28,6 +38,8 @@ class App extends Component {
 				console.log('Error occoured while fetching!', err);
       });
       this.colorChangeHandler();
+      this.twitterBoxColorHandler();
+      this.nextQuoteBoxColorHandler();
     }
 
   nextQuoteHandler = (e) =>{
@@ -43,26 +55,55 @@ class App extends Component {
 
   }
   colorChangeHandler = ()=>{
-  //  let color = Math.floor(Math.random()*this.state.colors.length);
-  //  let Bg = document.getElementsByTagName('body');
-  //  Bg.style.backgroundColor = this.state.colors[color]
   let colorItem  = this.state.colors[Math.floor(Math.random()*this.state.colors.length)];
   this.setState({
     selectedColor:colorItem
   })
-   
   }
+  twitterBoxColorHandler = ()=>{
+    let colorItemTwitter  = this.state.twitterBoxColor[Math.floor(Math.random()*this.state.twitterBoxColor.length)];
+    this.setState({
+      twitterSelectedColor:colorItemTwitter
+    })
+  }
+  nextQuoteBoxColorHandler = () =>{
+    let colorNextQuoteColor  = this.state.nextQuoteBoxColor[Math.floor(Math.random()*this.state.nextQuoteBoxColor.length)];
+    this.setState({
+      nextSelectedQuoteColor:colorNextQuoteColor
+    })
+  }
+  
   render() {
     console.log(this.state.quote);
     return (
-      <div className="App" id="quote-box" style={{backgroundColor:this.state.selectedColor}}>
+      <div className="App" id="quote-box" style={{background:this.state.selectedColor}}>
+       <Particles className="Particle"
+                  params={{
+                        particles: {
+                            number:{
+                                value:30,
+                                density:{
+                                    enable:true,
+                                    value_area:150
+                                }
+                            }
+                        }
+                    }}
+                />
+        
        <p id="text">{this.state.quote}</p>
-       <p id="author">{this.state.author}</p>
-       <div style={{boxSizing:'inherit',marginBottom: '0px'}}>
-         <a id="tweet-quote" href="twitter.com/intent/tweet" target="_blank" onClick={()=>this.twitterHandler(this.state.quote,this.state.author)}>Twitter</a>
+       <p id="author">- {this.state.author}</p>
+       <div>
+          <a style={{background:this.state.twitterSelectedColor}} 
+            id="tweet-quote" 
+            href="twitter.com/intent/tweet" 
+            target="_blank" 
+            onClick={()=>this.twitterHandler(this.state.quote,this.state.author)}>
+            <i class="fa fa-twitter"/> Twitter</a>
        </div>
-       <button id="new-quote" onClick={this.nextQuoteHandler}>New Quotes</button>
+       <button  style ={{background:this.state.nextSelectedQuoteColor}}id="new-quote" onClick={this.nextQuoteHandler}>New Quotes</button>
       </div>
+     
     );
   }
 }
