@@ -99,7 +99,7 @@ class App extends Component {
             href="twitter.com/intent/tweet" 
             target="_blank" 
             onClick={()=>this.twitterHandler(this.state.quote,this.state.author)}>
-            <i class="fa fa-twitter"/> Twitter</a>
+            <i className="fa fa-twitter"/> Twitter</a>
        </div>
        <button  style ={{background:this.state.nextSelectedQuoteColor}}id="new-quote" onClick={this.nextQuoteHandler}>New Quotes</button>
       </div>
