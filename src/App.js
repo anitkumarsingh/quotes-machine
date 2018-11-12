@@ -102,6 +102,7 @@ class App extends Component {
             <i className="fa fa-twitter"/> Twitter</a>
        </div>
        <button  style ={{background:this.state.nextSelectedQuoteColor}}id="new-quote" onClick={this.nextQuoteHandler}>New Quotes</button>
+       <p style={{textAlign:'center',paddingBottom:'20px'}}>&copy; 2018, Build By Anit Kumar</p>
       </div>
      
     );
